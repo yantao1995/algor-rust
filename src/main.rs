@@ -1,13 +1,23 @@
 use rand::Rng;
 use std::cmp::Ordering;
-use std::io;
+use std::{io, isize};
 
 fn main() {
     //guess_number();
-    knowledge();
+    //knowledge_normal_type();
+    knowledge_normal_fn(1);
 }
 
-fn knowledge() {
+//函数
+fn knowledge_normal_fn(x: i32) {
+    println!("x:{}", x);
+    let x:i32: =let y = 6;
+    println!("x:{x}");
+    println!("y:{y}");
+}
+
+//类型
+fn knowledge_normal_type() {
     const CT: i32 = 1;
     println!("{CT}");
     let a = "       ";
@@ -20,6 +30,30 @@ fn knowledge() {
     let mut b = b.len();
     // b = b.len();             //errror
     println!("let mut b {b}");
+
+    let mut u8: u8 = 255;
+    u8 += 1;
+    println!("u8:{u8}");
+
+    let mut i8: i8 = i8::MAX;
+    println!("i8:{i8}");
+    i8 += 1;
+    println!("i8:{i8}");
+
+    let mut isize: isize = 1 << 63;
+    isize -= 1;
+    println!("isize:{isize}");
+    isize += 1;
+    println!("isize:{isize}");
+
+    let tup: (i8, i32, u8) = (100, 100, 1);
+    println!("tup0:{}", tup.0);
+    println!("tup2:{}", tup.2);
+
+    let sz = [1, 2, 3];
+    println!("sz1:{}", sz[1]);
+    let szm: [i32; 2] = [1, 2];
+    println!("szm1:{}", szm[1]);
 }
 
 //猜数字
