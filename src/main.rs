@@ -18,7 +18,7 @@ fn main() {
     let str_lice = &String::from("news word");
     println!("slice_index:{}", &str_lice[0..knowledge_slice(&str_lice)]);
 }
-//函数
+//切片
 fn knowledge_slice(str: &String) -> usize {
     let bts = str.as_bytes();
     for (i, &item) in bts.iter().enumerate() {
