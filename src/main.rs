@@ -1,19 +1,96 @@
 use rand::Rng;
 use std::cmp::Ordering;
+use std::str::Bytes;
 use std::{io, isize};
 
 fn main() {
     //guess_number();
+
     //knowledge_normal_type();
-    knowledge_normal_fn(1);
+
+    //println!(" knowledge_normal_fn(0): {}", knowledge_normal_fn(0));
+    //println!(" knowledge_normal_fn(1): {}", knowledge_normal_fn(1));
+
+    // let mut str = String::from("s1");
+    // knowledge_owner(&mut str);
+    // println!("str:{}", str);
+
+    let str_lice = &String::from("news word");
+    println!("slice_index:{}", &str_lice[0..knowledge_slice(&str_lice)]);
+}
+//函数
+fn knowledge_slice(str: &String) -> usize {
+    let bts = str.as_bytes();
+    for (i, &item) in bts.iter().enumerate() {
+        if bts[i] == b' ' {
+            return i;
+        }
+    }
+    bts.len()
 }
 
 //函数
-fn knowledge_normal_fn(x: i32) {
+fn knowledge_owner(s1: &mut String) {
+    let str = String::from("hello");
+    println!("str:{}", str);
+    let str2 = str;
+    //println!("str:{}", str);  //str 无法使用
+    println!("str2:{}", str2);
+    let str3 = str2.clone();
+    println!("str3:{}", str3);
+
+    s1.push_str(" ssss");
+
+    let mut s = String::from("asd");
+    let r1 = &s;
+    let r2 = &s;
+    println!("r1:{}", r1);
+    println!("r2:{}", r2);
+    let r3 = &mut s;
+    println!("r3:{}", r3);
+    let r4 = s;
+    println!("r4:{}", r4);
+    // let r5 = &mut s; //被借走了，就不能用了
+    // println!("r5:{}", r5);
+}
+
+//函数
+fn knowledge_normal_fn(mut x: i32) -> i32 {
     println!("x:{}", x);
-    let x:i32: =let y = 6;
-    println!("x:{x}");
-    println!("y:{y}");
+    // let x:i32: =let y = 6;
+    // println!("x:{x}");
+    // println!("y:{y}");
+    let y = 0;
+    println!("y:{}", y);
+    x = y;
+    println!("x:{},y:{}", x, y);
+
+    let a = [2, 2, 3, 4];
+    for i in a.iter() {
+        println!("{}", i);
+    }
+    for i in (0..=3) {
+        println!("a[{i}]:{}", a[i]);
+    }
+
+    let mut str = String::from("hello");
+    println!("str:{}", str);
+    str.push_str(" ,world");
+    println!("str:{}", str);
+
+    return if x < 1 {
+        while x < 90 {
+            x += 1;
+        }
+        x + 10
+    } else {
+        loop {
+            x += 1;
+            if x == 100 {
+                break x * 2;
+            }
+        }
+    };
 }
 
 //类型
