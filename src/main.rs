@@ -1,6 +1,5 @@
 use rand::Rng;
 use std::cmp::Ordering;
-use std::str::Bytes;
 use std::{io, isize};
 
 fn main() {
@@ -15,9 +14,104 @@ fn main() {
     // knowledge_owner(&mut str);
     // println!("str:{}", str);
 
-    let str_lice = &String::from("news word");
-    println!("slice_index:{}", &str_lice[0..knowledge_slice(&str_lice)]);
+    // let str_lice = &String::from("news word");
+    // println!("slice_index:{}", &str_lice[0..knowledge_slice(&str_lice)]);
+
+    knowledge_struct();
 }
+
+#[derive(Debug)]
+struct User {
+    age: i32,
+    name: String,
+}
+
+impl User {
+    //无法使用
+    fn speak1() -> String {
+        String::from("阿萨德")
+    }
+    //借用
+    fn speak2(self) -> String {
+        String::from("阿萨德")
+    }
+    //引用
+    fn speak3(&self) -> String {
+        String::from("阿萨德")
+    }
+}
+
+//结构体
+fn knowledge_struct() {
+    let user1 = User {
+        age: 11,
+        name: String::new(),
+    };
+    // user1.name = String::from("value");
+    println!("user.name:{}", user1.name);
+
+    let mut user2 = User {
+        age: 11,
+        name: String::from("123"),
+    };
+    user2.age = 12;
+    user2.name = String::from("value");
+    println!("user2.age:{},name:{}", user2.age, user2.name);
+
+    //调用
+    let user3 = knowledge_struct_new_user(123);
+    println!("user3.age:{},name:{}", user3.age, user3.name);
+
+    //调用
+    let user4 = User { age: 4, ..user3 };
+    println!("user4.age:{},name:{}", user4.age, user4.name);
+
+    //无字段元组
+    struct Point(i32, i32, String);
+    let p1 = Point(11, 22, String::from("point"));
+    println!("point,0:{},1:{},2:{}", p1.0, p1.1, p1.2);
+
+    //元组传参
+    let tp = (3, 2);
+    let tpr = knowledge_struct_tup(tp);
+    println!("knowledge_struct_tup:{}", tpr);
+
+    //结构体传参
+    let user5 = User {
+        age: 12,
+        name: String::new(),
+    };
+    let us5 = knowledge_struct_struct(&user5);
+    println!("knowledge_struct_struct:{}", us5);
+    println!("knowledge_struct_struct_done:{}", user5.age);
+    println!("knowledge_struct_struct_println:{user5:?}");
+    println!("knowledge_struct_struct_println:{user5:#?}");
+    dbg!(user5);
+
+    //方法
+    // let spk = user4.speak1(); //无法执行
+    // println!("user4 speak1:{}", spk);
+    let spk = user4.speak3(); //
+    println!("user4 speak2:{}", spk);
+    let spk = user4.speak2(); //执行借用的话，user4就无了
+    println!("user4 speak2:{}", spk);
+}
+
+fn knowledge_struct_struct(user: &User) -> i32 {
+    user.age * 20
+}
+
+fn knowledge_struct_tup(dimens: (u32, u32)) -> u32 {
+    dimens.0 * dimens.1
+}
+
+fn knowledge_struct_new_user(age: i32) -> User {
+    User {
+        age,
+        name: String::from("knowledge_struct_new_user"),
+    }
+}
+
 //切片
 fn knowledge_slice(str: &String) -> usize {
     let bts = str.as_bytes();
@@ -69,7 +163,10 @@ fn knowledge_normal_fn(mut x: i32) -> i32 {
     for i in a.iter() {
         println!("{}", i);
     }
-    for i in (0..=3) {
+    for i in 0..=3 {
+        println!("a[{i}]:{}", a[i]);
+    }
+    for i in (1..2).rev() {
         println!("a[{i}]:{}", a[i]);
     }
 
@@ -102,9 +199,9 @@ fn knowledge_normal_type() {
     let a = a.len();
     println!("let a {a}");
 
-    let mut b = "   ";
+    let b = "   ";
     println!("let mut b {b}");
-    let mut b = b.len();
+    let b = b.len();
     // b = b.len();             //errror
     println!("let mut b {b}");
 
