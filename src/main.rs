@@ -77,7 +77,7 @@ fn knowledge_struct() {
     println!("knowledge_struct_tup:{}", tpr);
 
     //结构体传参
-    let user5 = User {
+    let user5: User = User {
         age: 12,
         name: String::new(),
     };
@@ -95,7 +95,14 @@ fn knowledge_struct() {
     println!("user4 speak2:{}", spk);
     let spk = user4.speak2(); //执行借用的话，user4就无了
     println!("user4 speak2:{}", spk);
+
+    //元组 struct
+    let t1: tp1 = tp1(1, 1, 0.123);
+    println!("元组结构体t1:{}", t1.0);
 }
+
+struct tp1(i32, u32, f64);
+struct tp2(i32, u32, f64); //与tp1不是同一个类型
 
 fn knowledge_struct_struct(user: &User) -> i32 {
     user.age * 20
@@ -113,7 +120,7 @@ fn knowledge_struct_new_user(age: i32) -> User {
 }
 
 //切片
-fn knowledge_slice(str: &String) -> usize {
+fn knowledge_slice(str: &str) -> usize {
     let bts = str.as_bytes();
     for (i, &item) in bts.iter().enumerate() {
         if bts[i] == b' ' {
