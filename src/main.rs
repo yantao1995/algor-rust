@@ -26,6 +26,11 @@ fn main() {
     algor_rust::a::b::call_super();
 
     b::call_super();
+    algor_rust::call_dir();
+
+    //常见集合 https://kaisery.github.io/trpl-zh-cn/ch08-00-common-collections.html
+
+    //视频 https://www.bilibili.com/video/BV1hp4y1k7SV?spm_id_from=333.788.player.switch&vd_source=ca42120d1d91fa8a7a1d2c0f190fae7c&p=33
 }
 
 #[derive(Debug)]

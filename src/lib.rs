@@ -29,9 +29,8 @@ pub fn call_ab() {
 // pub 同时可以将枚举 和 struct字段也变成公共的
 
 // 多级目录
-
 mod front_of_house;
-
-fn call_dir() {
-    front_of_house::eat_at_restaurant();
+pub use crate::front_of_house::hosting;
+pub fn call_dir() {
+    hosting::add_to_wait_list();
 }
