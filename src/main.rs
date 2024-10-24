@@ -1,7 +1,7 @@
+use algor_rust::a::b;
 use rand::Rng;
 use std::cmp::Ordering;
 use std::{io, isize};
-
 fn main() {
     //guess_number();
 
@@ -17,7 +17,76 @@ fn main() {
     // let str_lice = &String::from("news word");
     // println!("slice_index:{}", &str_lice[0..knowledge_slice(&str_lice)]);
 
-    knowledge_struct();
+    // knowledge_struct();
+
+    //knowledge_enum()
+
+    algor_rust::call_ab();
+    algor_rust::a::b::call("ssssss");
+    algor_rust::a::b::call_super();
+
+    b::call_super();
+}
+
+#[derive(Debug)]
+enum IpAddressKind {
+    V4,
+    V6,
+}
+
+impl IpAddressKind {
+    fn call(&self) {}
+}
+
+fn value_in_addr(ip_addr: IpAddressKind) -> i32 {
+    match ip_addr {
+        //必须穷举所有可能性
+        IpAddressKind::V4 => 4,
+        IpAddressKind::V6 => {
+            println!("println");
+            6
+        }
+    }
+}
+
+fn knowledge_enum() {
+    let four = IpAddressKind::V4;
+    let six = IpAddressKind::V6;
+    four.call();
+    six.call();
+
+    let some_number = Some(5);
+    let some_string = Some("asdsad");
+
+    let absent_number: Option<i32> = None;
+
+    // let sum = some_number + absent_number; //不能直接相加  得将 absent_number 转成 i32
+    //println!("sum:{}", sum);
+
+    fn mch(x: Option<i32>) -> Option<i32> {
+        match x {
+            None => None,
+            Some(i) => Some(i + 1),
+        }
+    }
+    let five = Some(5);
+    let six = mch(five);
+
+    let i = 8;
+    match i {
+        9 => {
+            println!("---");
+        }
+        //二选一
+        other => {
+            println!("other:{}", other);
+        }
+        _ => (), //二选一
+    }
+
+    if let Some(max) = five {
+        println!("if let some:{}", max)
+    }
 }
 
 #[derive(Debug)]
